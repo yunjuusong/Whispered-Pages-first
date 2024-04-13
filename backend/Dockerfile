@@ -8,9 +8,9 @@ RUN apt-get install 'ffmpeg'\
     'libsm6'\
     'libxext6'  -y
 
-COPY requirements.txt requirements.txt
+# COPY requirements.txt requirements.txt
 # Set a longer timeout for pip during the installation of requirements
-RUN pip install --default-timeout=100 -r requirements.txt
+# RUN pip install --default-timeout=100 -r requirements.txt
 
 
 COPY . .
