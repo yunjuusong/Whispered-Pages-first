@@ -1,0 +1,68 @@
+.home-container {
+    background-color: #0c1446; /* Dark blue background */
+    color: #ffffff; /* White text color */
+    padding: 50px;
+    text-align: center;
+    position: relative; /* Position relative for pseudo-elements */
+  }
+  
+  /* Moon and Stars */
+  .home-container::before,
+  .home-container::after {
+    content: '';
+    position: absolute;
+    background-color: #ffffff; /* White color for stars and moon */
+    border-radius: 50%;
+  }
+  
+  /* Stars */
+  .home-container::before {
+    width: 4px; /* Star size */
+    height: 4px;
+    box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), -1px -1px 2px rgba(255, 255, 255, 0.8);
+  }
+  
+  /* Moon */
+  .home-container::after {
+    width: 40px; /* Moon size */
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.7); /* Glow effect for moon */
+    top: 20px; /* Adjust top position */
+    right: 20px; /* Adjust right position */
+  }
+  
+  /* Typography */
+  .home-container h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .home-container p {
+    font-size: 18px;
+  }
+  
+  /* Accent Colors */
+  a {
+    color: #9f9fff; /* Light purple for links */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  button {
+    background-color: #4966b1; /* Dark blue for buttons */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer; /* Show pointer cursor on hoverable elements */
+  }
+  
+  button:hover {
+    background-color: #324786; /* Darker blue on hover */
+  }
+  
+  /* Soft Shadows */
+  .home-container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  }
+  
