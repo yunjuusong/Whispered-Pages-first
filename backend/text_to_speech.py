@@ -1,36 +1,48 @@
-"""Synthesizes speech from the input string of text or ssml.
-Make sure to be working in a virtual environment.
+# Import the required module for text 
+# to speech conversion 
+from gtts import gTTS 
+import ebooklib
+from ebooklib import epub
 
-Note: ssml must be well-formed according to:
-    https://www.w3.org/TR/speech-synthesis/
-"""
-from google.cloud import texttospeech
 
-# Instantiates a client
-client = texttospeech.TextToSpeechClient()
+import os 
 
-# Set the text input to be synthesized
-synthesis_input = texttospeech.SynthesisInput(text="Hello, World!")
+def process_text(filename):
+    text = ""
 
-# Build the voice request, select the language code ("en-US") and the ssml
-# voice gender ("neutral")
-voice = texttospeech.VoiceSelectionParams(
-    language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
-)
+    with open(filename, "r") as file_in: 
+        line = file_in.readline()
 
-# Select the type of audio file you want returned
-audio_config = texttospeech.AudioConfig(
-    audio_encoding=texttospeech.AudioEncoding.MP3
-)
+        while line[:32] != "*** END OF THE PROJECT GUTENBERG":
+            # print(line)
+            if line.strip() != "[Illustration]":
+                text += line
+            line = file_in.readline()
 
-# Perform the text-to-speech request on the text input with the selected
-# voice parameters and audio file type
-response = client.synthesize_speech(
-    input=synthesis_input, voice=voice, audio_config=audio_config
-)
+    return text
 
-# The response's audio_content is binary.
-with open("output.mp3", "wb") as out:
-    # Write the response to the output file.
-    out.write(response.audio_content)
-    print('Audio content written to file "output.mp3"')
+
+def speech(filename):
+    text = process_text(filename)
+
+    audio = gTTS(text=text, lang='en', slow=False)
+
+    audio.save(filename + ".mp3")
+    print("done")
+
+
+# speech("backend/books/the_tale_of_the_pie_and_the_pattypan.txt")
+speech("backend/books/the_tale_of_two_bad_mice.txt")
+
+
+
+
+
+
+
+# book = epub.read_epub("backend/books/the_story_of_miss_moppet")
+# items = list(book.get_items_of_type(ebooklib.ITEM_DOCUMENT))
+# cover_image = book.get_item_with_id('cover-image')
+# cover_image.save("backend/books/test.jpg")
+# print(items)
+# print(book.get_items())
